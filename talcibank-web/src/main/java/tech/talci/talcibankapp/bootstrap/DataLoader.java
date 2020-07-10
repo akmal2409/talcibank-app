@@ -1,13 +1,14 @@
 package tech.talci.talcibankapp.bootstrap;
 
-import domain.*;
+import tech.talci.talcibankapp.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+
 import org.springframework.stereotype.Component;
-import repositories.AccountRepository;
-import repositories.CardRepository;
-import repositories.ClientRepository;
-import repositories.TransactionRepository;
+import tech.talci.talcibankapp.repositories.AccountRepository;
+import tech.talci.talcibankapp.repositories.CardRepository;
+import tech.talci.talcibankapp.repositories.ClientRepository;
+import tech.talci.talcibankapp.repositories.TransactionRepository;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -19,8 +20,8 @@ public class DataLoader implements CommandLineRunner {
 
     private AccountRepository accountRepository;
     private CardRepository cardRepository;
-    private ClientRepository clientRepository;
     private TransactionRepository transactionRepository;
+    private ClientRepository clientRepository;
 
     @Autowired
     public DataLoader(AccountRepository accountRepository, CardRepository cardRepository, ClientRepository clientRepository, TransactionRepository transactionRepository) {
