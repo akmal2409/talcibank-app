@@ -1,11 +1,11 @@
-package tech.talci.talcibank.repositories;
+package repositories;
 
+import domain.Account;
+import domain.AccountType;
+import domain.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import tech.talci.talcibank.domain.Account;
-import tech.talci.talcibank.domain.AccountType;
-import tech.talci.talcibank.domain.Card;
-import tech.talci.talcibank.domain.Client;
+
 
 import java.util.Set;
 

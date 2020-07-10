@@ -1,11 +1,10 @@
-package tech.talci.talcibank.services.jpa;
+package services.jpa;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import domain.Client;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-import tech.talci.talcibank.domain.Client;
-import tech.talci.talcibank.repositories.ClientRepository;
-import tech.talci.talcibank.services.ClientService;
+import repositories.ClientRepository;
+import services.ClientService;
 
 import javax.transaction.Transactional;
 import java.util.HashSet;

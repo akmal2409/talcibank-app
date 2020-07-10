@@ -1,13 +1,13 @@
-package tech.talci.talcibank.services.jpa;
+package services.jpa;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import domain.Account;
+import domain.AccountType;
+import domain.Client;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-import tech.talci.talcibank.domain.Account;
-import tech.talci.talcibank.domain.AccountType;
-import tech.talci.talcibank.domain.Client;
-import tech.talci.talcibank.repositories.AccountRepository;
-import tech.talci.talcibank.services.AccountService;
+import repositories.AccountRepository;
+import services.AccountService;
+
 
 import javax.transaction.Transactional;
 import java.util.HashSet;

@@ -1,12 +1,10 @@
-package tech.talci.talcibank.repositories;
+package repositories;
 
+import domain.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import tech.talci.talcibank.domain.Account;
-import tech.talci.talcibank.domain.Transaction;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.Set;
 
 @Repository

@@ -1,12 +1,12 @@
-package tech.talci.talcibank.services.jpa;
+package services.jpa;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import domain.Card;
+import domain.CardType;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-import tech.talci.talcibank.domain.Card;
-import tech.talci.talcibank.domain.CardType;
-import tech.talci.talcibank.repositories.CardRepository;
-import tech.talci.talcibank.services.CardService;
+import repositories.CardRepository;
+import services.CardService;
+
 
 import javax.transaction.Transactional;
 import java.util.HashSet;

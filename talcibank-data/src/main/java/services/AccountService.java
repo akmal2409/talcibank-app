@@ -1,9 +1,8 @@
 package services;
 
-import tech.talci.talcibank.domain.Account;
-import tech.talci.talcibank.domain.AccountType;
-import tech.talci.talcibank.domain.Card;
-import tech.talci.talcibank.domain.Client;
+import domain.Account;
+import domain.AccountType;
+import domain.Client;
 
 import java.util.Set;
 

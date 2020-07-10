@@ -1,9 +1,10 @@
-package tech.talci.talcibank.repositories;
+package repositories;
 
+import domain.Card;
+import domain.CardType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import tech.talci.talcibank.domain.Card;
-import tech.talci.talcibank.domain.CardType;
+
 
 import java.util.Set;
 

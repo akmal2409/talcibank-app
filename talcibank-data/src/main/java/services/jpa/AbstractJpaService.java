@@ -1,8 +1,8 @@
-package tech.talci.talcibank.services.jpa;
+package services.jpa;
 
+import domain.BaseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import tech.talci.talcibank.domain.BaseEntity;
-import tech.talci.talcibank.services.CrudService;
+import services.CrudService;
 
 import java.util.HashSet;
 import java.util.Set;
