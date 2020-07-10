@@ -51,7 +51,7 @@
     </build>
     <scm>
         <developerConnection>scm:git:git@github.com:akmal2409/talcibank-app.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>talcibank-app-0.0.1</tag>
     </scm>
 
 </project>
