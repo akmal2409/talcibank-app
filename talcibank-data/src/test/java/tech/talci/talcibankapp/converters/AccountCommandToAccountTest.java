@@ -11,7 +11,6 @@ public class AccountCommandToAccountTest {
 
     public static final Long ID_VALUE = Long.valueOf(2L);
     public static final String NAME = "Test Name";
-    public static final String CLIENTS_NAME = "Test Clients Name";
 
     AccountCommandToAccount converter;
 
@@ -35,10 +34,14 @@ public class AccountCommandToAccountTest {
         //given
         AccountCommand command = new AccountCommand();
         command.setId(ID_VALUE);
-        command.setClientsName(CLIENTS_NAME);
         command.setName(NAME);
 
         //when
-        Account account = converter.convert()
+        Account account = converter.convert(command);
+
+        //then
+        assertNotNull(account);
+        assertEquals(ID_VALUE, account.getId());
+        assertEquals(NAME, account.getName());
     }
 }

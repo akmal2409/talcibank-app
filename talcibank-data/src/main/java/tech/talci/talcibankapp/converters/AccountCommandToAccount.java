@@ -11,7 +11,7 @@ public class AccountCommandToAccount implements Converter<AccountCommand, Accoun
     @Synchronized
     @Nullable
     @Override
-    public Account convert(AccountCommand accountCommand) {
+    public Account convert(AccountCommand source) {
         return null;
     }
 }
