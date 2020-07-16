@@ -1,19 +1,25 @@
 package tech.talci.talcibankapp.domain;
 
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = {"client", "transactions"})
-@NoArgsConstructor
 @Builder
 @Entity
 @Table(name = "accounts")
-public class Account extends BaseEntity{
+public class Account {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -31,7 +37,7 @@ public class Account extends BaseEntity{
     @Enumerated(value = EnumType.STRING)
     private AccountType accountType;
 
-    @OneToMany
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Transaction> transactions = new HashSet<>();
 
 

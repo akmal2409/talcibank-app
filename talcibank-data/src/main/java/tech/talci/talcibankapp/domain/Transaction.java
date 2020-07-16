@@ -8,12 +8,16 @@ import java.sql.Timestamp;
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"sender", "recipient"})
 @AllArgsConstructor
+@EqualsAndHashCode(exclude = {"sender", "recipient"})
 @Builder
 @Entity
 @Table(name = "transactions")
-public class Transaction extends BaseEntity{
+public class Transaction{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "timestamp")
     private Timestamp timestamp;
@@ -22,9 +26,8 @@ public class Transaction extends BaseEntity{
     @JoinColumn(name = "sender_id")
     private Account sender;
 
-    @ManyToOne
-    @JoinColumn(name = "recipient_id")
-    private Account recipient;
+    @Column(name = "recipient")
+    private Long recipient;
 
     @Column(name = "description")
     private String description;

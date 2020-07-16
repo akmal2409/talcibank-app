@@ -8,6 +8,7 @@ import tech.talci.talcibankapp.domain.Account;
 import tech.talci.talcibankapp.domain.Card;
 import tech.talci.talcibankapp.domain.CardType;
 import tech.talci.talcibankapp.repositories.CardRepository;
+import tech.talci.talcibankapp.services.CardService;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -19,7 +20,7 @@ import static org.mockito.Mockito.*;
 
 public class CardJpaServiceTest {
 
-    CardJpaService cardJpaService;
+    CardService cardService;
 
     @Mock
     CardRepository cardRepository;
@@ -28,7 +29,7 @@ public class CardJpaServiceTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        cardJpaService = new CardJpaService(cardRepository);
+        cardService = new CardJpaService(cardRepository);
     }
 
     @Test
@@ -42,7 +43,7 @@ public class CardJpaServiceTest {
         when(cardRepository.findByNumber(anyLong())).thenReturn(optionalCard.orElse(null));
 
         //then
-        Card returnedCard = cardJpaService.findByNumber(23L);
+        Card returnedCard = cardService.findByNumber(23L);
         assertNotNull(returnedCard);
         verify(cardRepository, times(1)).findByNumber(anyLong());
     }
@@ -59,7 +60,7 @@ public class CardJpaServiceTest {
         when(cardRepository.findByHoldersName(anyString())).thenReturn(cardSet);
 
         //then
-        Set<Card> returnedCards = cardJpaService.findByHoldersName("Test");
+        Set<Card> returnedCards = cardService.findByHoldersName("Test");
         assertEquals(1, returnedCards.size());
         verify(cardRepository, timeout(1)).findByHoldersName(anyString());
     }
@@ -76,7 +77,7 @@ public class CardJpaServiceTest {
         when(cardRepository.findByCardType(any())).thenReturn(cardSet);
 
         //then
-        Set<Card> returnedCards = cardJpaService.findByCardType(CardType.AMEX);
+        Set<Card> returnedCards = cardService.findByCardType(CardType.AMEX);
         assertEquals(1, returnedCards.size());
         verify(cardRepository, timeout(1)).findByCardType(any());
     }

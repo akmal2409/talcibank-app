@@ -10,12 +10,16 @@ import java.util.Set;
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"cards", "accounts"})
 @AllArgsConstructor
+@EqualsAndHashCode(exclude = {"cards", "accounts"})
 @Builder
 @Entity
 @Table(name = "clients")
-public class Client extends BaseEntity{
+public class Client {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -25,6 +29,12 @@ public class Client extends BaseEntity{
 
     @Column(name = "address")
     private String address;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "phone_number")
     private String phoneNumber;

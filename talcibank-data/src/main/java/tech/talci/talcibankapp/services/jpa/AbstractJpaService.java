@@ -1,13 +1,12 @@
 package tech.talci.talcibankapp.services.jpa;
 
-import tech.talci.talcibankapp.domain.BaseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import tech.talci.talcibankapp.services.CrudService;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public abstract class AbstractJpaService<T extends BaseEntity, R extends JpaRepository<T, Long>>
+public abstract class AbstractJpaService<T, R extends JpaRepository<T, Long>>
         implements CrudService<T, Long> {
 
     protected R repository;

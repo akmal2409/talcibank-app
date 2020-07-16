@@ -6,13 +6,17 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {"client"})
-@AllArgsConstructor
 @Builder
 @Entity
 @Table
-public class Card extends BaseEntity{
+public class Card {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "account_number")
     private Long number;

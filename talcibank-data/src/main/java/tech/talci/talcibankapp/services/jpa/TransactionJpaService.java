@@ -32,7 +32,7 @@ public class TransactionJpaService extends AbstractJpaService<Transaction, Trans
     }
 
     @Override
-    public Set<Transaction> findBySender(Long number) {
-        return new HashSet<>(repository.findBySender(number));
+    public Set<Transaction> findBySender(Account sender) {
+        return new HashSet<>(repository.findBySender(sender));
     }
 }

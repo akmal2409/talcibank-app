@@ -105,7 +105,7 @@ public class DataLoader implements CommandLineRunner {
         tr1.setCurrency(Currency.EURO);
         tr1.setDescription("Money Transfer");
         tr1.setSender(akmalsAccount1);
-        tr1.setRecipient(gabrielsAccount1);
+        tr1.setRecipient(gabrielsAccount1.getNumber());
         tr1.setTimestamp(Timestamp.valueOf(LocalDateTime.now()));
         akmalsAccount1.addTransaction(tr1);
 
@@ -113,15 +113,12 @@ public class DataLoader implements CommandLineRunner {
         tr2.setCurrency(Currency.DOLLAR);
         tr2.setDescription("Money Transfer back");
         tr2.setSender(gabrielsAccount1);
-        tr2.setRecipient(akmalsAccount1);
+        tr2.setRecipient(akmalsAccount1.getNumber());
         tr2.setTimestamp(Timestamp.valueOf(LocalDateTime.now()));
         gabrielsAccount1.addTransaction(tr2);
 
         transactionRepository.save(tr1);
         transactionRepository.save(tr2);
-
-        Set<Card> platinumCards = cardRepository.findByCardType(CardType.MASTERCARD_PLATINUM);
-        platinumCards.forEach(card -> System.out.println(card.getNumber()));
 
     }
 

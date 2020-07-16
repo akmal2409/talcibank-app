@@ -11,6 +11,7 @@ import tech.talci.talcibankapp.domain.Account;
 import tech.talci.talcibankapp.domain.AccountType;
 import tech.talci.talcibankapp.domain.Client;
 import tech.talci.talcibankapp.repositories.AccountRepository;
+import tech.talci.talcibankapp.services.AccountService;
 
 import java.util.*;
 
@@ -23,13 +24,13 @@ class AccountJpaServiceTest {
     @Mock
     AccountRepository accountRepository;
 
-    AccountJpaService accountJpaService;
+    AccountService accountService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        accountJpaService = new AccountJpaService(accountRepository);
+        accountService = new AccountJpaService(accountRepository);
     }
 
     @Test
@@ -44,7 +45,7 @@ class AccountJpaServiceTest {
         //when
         when(accountRepository.findByAccountType(any())).thenReturn(accountList);
         //then
-        Set<Account> accounts = accountJpaService.findByAccountType(AccountType.PERSONAL);
+        Set<Account> accounts = accountService.findByAccountType(AccountType.PERSONAL);
 
         assertEquals(1, accounts.size());
         verify(accountRepository, times(1)).findByAccountType(any());
@@ -61,7 +62,7 @@ class AccountJpaServiceTest {
         when(accountRepository.findByNumber(anyLong())).thenReturn(accountOptional.orElse(null));
 
         //then
-        Account returnedAccount = accountJpaService.findByNumber(3L);
+        Account returnedAccount = accountService.findByNumber(3L);
 
         assertNotNull(returnedAccount);
         verify(accountRepository, times(1)).findByNumber(anyLong());
@@ -78,7 +79,7 @@ class AccountJpaServiceTest {
         when(accountRepository.findByClient(any())).thenReturn(accountOptional.orElse(null));
 
         //then
-        Account returnedAccount = accountJpaService.findByClient(new Client());
+        Account returnedAccount = accountService.findByClient(new Client());
         assertNotNull(returnedAccount);
         verify(accountRepository, times(1)).findByClient(any());
     }
