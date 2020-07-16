@@ -8,6 +8,12 @@ import tech.talci.talcibankapp.domain.Transaction;
 
 public class TransactionCommandToTransaction implements Converter<TransactionCommand, Transaction> {
 
+    private final AccountCommandToAccount accountConverter;
+
+    public TransactionCommandToTransaction(AccountCommandToAccount accountConverter) {
+        this.accountConverter = accountConverter;
+    }
+
     @Nullable
     @Synchronized
     @Override

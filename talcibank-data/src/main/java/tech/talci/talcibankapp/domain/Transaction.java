@@ -33,7 +33,7 @@ public class Transaction{
     private String description;
 
     @Column(name = "amount")
-    private double amount;
+    private Double amount;
 
     @Enumerated(value = EnumType.STRING)
     private Currency currency;

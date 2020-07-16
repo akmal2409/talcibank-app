@@ -14,6 +14,6 @@ public class TransactionCommand {
     private AccountCommand sender;
     private Long recipient;
     private String description;
-    private double amount;
+    private Double amount;
     private Currency currency;
 }
