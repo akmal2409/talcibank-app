@@ -1,5 +1,12 @@
 package tech.talci.talcibankapp.commands;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class ClientCommand {
 
     private Long id;
