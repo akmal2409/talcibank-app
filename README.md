@@ -1,8 +1,7 @@
 # talcibank-app
 ![Logo](https://github.com/akmal2409/talcibank-app/blob/master/talcibank-web/src/main/resources/static/images/logo.png?raw=true)
 Hello! This is my 4th Spring Boot project "Talci Bank App". I am trying to build fully functioning simple online banking system from scratch.
-
-## Note
+#### Note
 Web and Data are separated to structure the project better.
 
 # Future Plans and Improvements
