@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import tech.talci.talcibankapp.commands.AccountCommand;
 import tech.talci.talcibankapp.domain.Account;
+import tech.talci.talcibankapp.domain.AccountType;
 
 import static org.junit.Assert.*;
 
@@ -11,6 +12,7 @@ public class AccountToAccountCommandTest {
 
     public static final Long ID_VALUE = Long.valueOf(2L);
     public static final String NAME = "Test Name";
+    public static final AccountType ACCOUNT_TYPE = AccountType.PERSONAL;
 
     AccountToAccountCommand converter;
 
@@ -35,6 +37,7 @@ public class AccountToAccountCommandTest {
         Account account = new Account();
         account.setId(ID_VALUE);
         account.setName(NAME);
+        account.setAccountType(ACCOUNT_TYPE);
 
         //when
         AccountCommand command = converter.convert(account);
@@ -43,5 +46,6 @@ public class AccountToAccountCommandTest {
         assertNotNull(command);
         assertEquals(ID_VALUE, command.getId());
         assertEquals(NAME, command.getName());
+        assertEquals(ACCOUNT_TYPE, command.getAccountType());
     }
 }

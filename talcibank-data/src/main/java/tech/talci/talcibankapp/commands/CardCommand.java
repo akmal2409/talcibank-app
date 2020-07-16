@@ -15,4 +15,5 @@ public class CardCommand {
     private String holdersName;
     private CardType cardType;
     private Currency currency;
+    private Long clientID;
 }

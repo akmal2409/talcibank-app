@@ -40,4 +40,9 @@ public class AccountJpaService extends AbstractJpaService<Account, AccountReposi
     public Account findByClient(Client client) {
         return repository.findByClient(client);
     }
+
+    @Override
+    public Account findByAccountId(Long id) {
+        return super.findById(id);
+    }
 }

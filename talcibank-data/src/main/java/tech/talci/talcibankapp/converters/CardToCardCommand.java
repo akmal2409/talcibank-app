@@ -12,7 +12,17 @@ public class CardToCardCommand implements Converter<Card, CardCommand> {
     @Nullable
     @Synchronized
     @Override
-    public CardCommand convert(Card card) {
-        return null;
+    public CardCommand convert(Card source) {
+
+        if(source == null){
+            return null;
+        }
+
+        CardCommand command = new CardCommand();
+        command.setHoldersName(source.getHoldersName());
+        command.setCurrency(source.getCurrency());
+        command.setCardType(source.getCardType());
+        command.setId(source.getId());
+        return command;
     }
 }

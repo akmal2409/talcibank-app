@@ -9,6 +9,8 @@ import java.util.Set;
 
 public interface AccountService extends CrudService<Account, Long>{
 
+    Account findByAccountId(Long id);
+
     Set<Account> findByAccountType(AccountType type);
 
     Account findByNumber(Long number);

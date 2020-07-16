@@ -17,7 +17,19 @@ public class TransactionCommandToTransaction implements Converter<TransactionCom
     @Nullable
     @Synchronized
     @Override
-    public Transaction convert(TransactionCommand transactionCommand) {
-        return null;
+    public Transaction convert(TransactionCommand source) {
+
+        if(source == null){
+            return null;
+        }
+
+        Transaction transaction = new Transaction();
+        transaction.setAmount(source.getAmount());
+        transaction.setCurrency(source.getCurrency());
+        transaction.setDescription(source.getDescription());
+        transaction.setId(source.getId());
+        transaction.setRecipient(source.getRecipient());
+        transaction.setSender(accountConverter.convert(source.getSender()));
+        return transaction;
     }
 }
