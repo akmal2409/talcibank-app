@@ -33,7 +33,7 @@ public class CardJpaService extends AbstractJpaService<Card, CardRepository> imp
     }
 
     @Override
-    public Set<Card> findByType(CardType type) {
+    public Set<Card> findByCardType(CardType type) {
         return new HashSet<>(repository.findByCardType(type));
     }
 }

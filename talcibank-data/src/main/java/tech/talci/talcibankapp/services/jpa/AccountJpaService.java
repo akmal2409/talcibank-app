@@ -11,6 +11,7 @@ import tech.talci.talcibankapp.services.AccountService;
 
 import javax.transaction.Transactional;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -26,7 +27,8 @@ public class AccountJpaService extends AbstractJpaService<Account, AccountReposi
 
     @Override
     public Set<Account> findByAccountType(AccountType type) {
-        return new HashSet<>(findByAccountType(type));
+        Set<Account> accounts = repository.findByAccountType(type);
+        return accounts;
     }
 
     @Override

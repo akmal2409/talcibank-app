@@ -11,5 +11,5 @@ public interface CardService extends CrudService<Card, Long>{
 
     Set<Card> findByHoldersName(String holdersName);
 
-    Set<Card> findByType(CardType type);
+    Set<Card> findByCardType(CardType type);
 }

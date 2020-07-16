@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -81,6 +82,7 @@ public class DataLoader implements CommandLineRunner {
         Card gabrielsCard = new Card();
         gabrielsCard.setCardType(CardType.MASTERCARD_PLATINUM);
         gabrielsCard.setCurrency(Currency.EURO);
+        gabrielsCard.setNumber(2312321312L);
         gabrielsCard.setHoldersName("Gabbo Fusco");
         gabrielsCard.setClient(gabriel);
         gabrielsCard.setIssued(LocalDate.parse("23-08-2020", formatter));
@@ -117,6 +119,9 @@ public class DataLoader implements CommandLineRunner {
 
         transactionRepository.save(tr1);
         transactionRepository.save(tr2);
+
+        Set<Card> platinumCards = cardRepository.findByCardType(CardType.MASTERCARD_PLATINUM);
+        platinumCards.forEach(card -> System.out.println(card.getNumber()));
 
     }
 
