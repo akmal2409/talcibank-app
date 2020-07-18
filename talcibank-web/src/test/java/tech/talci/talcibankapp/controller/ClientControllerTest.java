@@ -6,6 +6,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import tech.talci.talcibankapp.commands.ClientCommand;
 import tech.talci.talcibankapp.domain.Client;
 import tech.talci.talcibankapp.repositories.ClientRepository;
 import tech.talci.talcibankapp.services.ClientService;
@@ -48,6 +49,22 @@ class ClientControllerTest {
         mockMvc.perform(get("/cabinet/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("client/cabinet"))
+                .andExpect(model().attributeExists("client"));
+    }
+
+    @Test
+    public void testShowTransactions() throws Exception{
+        //given
+        Client client = new Client();
+        client.setId(2L);
+
+        //when
+        when(clientService.findById(anyLong())).thenReturn(client);
+
+        //then
+        mockMvc.perform(get("/cabinet/1/transactions"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("client/transactions"))
                 .andExpect(model().attributeExists("client"));
     }
 }

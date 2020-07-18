@@ -7,11 +7,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import tech.talci.talcibankapp.commands.AccountCommand;
 import tech.talci.talcibankapp.domain.Account;
 import tech.talci.talcibankapp.domain.AccountType;
 import tech.talci.talcibankapp.domain.Client;
 import tech.talci.talcibankapp.repositories.AccountRepository;
 import tech.talci.talcibankapp.services.AccountService;
+import tech.talci.talcibankapp.services.ClientService;
 
 import java.util.*;
 
@@ -26,11 +28,14 @@ class AccountJpaServiceTest {
 
     AccountService accountService;
 
+    @Mock
+    ClientService clientService;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        accountService = new AccountJpaService(accountRepository);
+        accountService = new AccountJpaService(accountRepository, clientService);
     }
 
     @Test
@@ -83,4 +88,5 @@ class AccountJpaServiceTest {
         assertNotNull(returnedAccount);
         verify(accountRepository, times(1)).findByClient(any());
     }
+
 }

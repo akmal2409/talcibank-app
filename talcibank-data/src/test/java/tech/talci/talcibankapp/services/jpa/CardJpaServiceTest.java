@@ -2,11 +2,14 @@ package tech.talci.talcibankapp.services.jpa;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import tech.talci.talcibankapp.commands.CardCommand;
 import tech.talci.talcibankapp.domain.Account;
 import tech.talci.talcibankapp.domain.Card;
 import tech.talci.talcibankapp.domain.CardType;
+import tech.talci.talcibankapp.domain.Client;
 import tech.talci.talcibankapp.repositories.CardRepository;
 import tech.talci.talcibankapp.services.CardService;
 
@@ -80,5 +83,46 @@ public class CardJpaServiceTest {
         Set<Card> returnedCards = cardService.findByCardType(CardType.AMEX);
         assertEquals(1, returnedCards.size());
         verify(cardRepository, timeout(1)).findByCardType(any());
+    }
+
+    @Test
+    public void testFindByCommandById() {
+        //given
+        Card card = new Card();
+        card.setId(2L);
+        Client client = new Client();
+        client.setId(3L);
+        card.setClient(client);
+
+        Optional<Card> cardOptional = Optional.of(card);
+
+        //when
+        when(cardRepository.findById(anyLong())).thenReturn(cardOptional);
+
+        //then
+        CardCommand cardCommand = cardService.findCommandById(2l);
+
+        assertEquals(card.getId(), cardCommand.getId());
+        assertEquals(card.getClient().getId(), cardCommand.getClientID());
+        verify(cardRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    public void testSaveCardCommand() {
+        //given
+        Card card = new Card();
+        card.setId(2L);
+        Client client = new Client();
+        client.setId(3L);
+        card.setClient(client);
+
+        //when
+        when(cardRepository.save(any())).thenReturn(card);
+
+        //then
+        CardCommand returnedCard = cardService.saveCardCommand(new CardCommand());
+        assertEquals(card.getId(), returnedCard.getId());
+        verify(cardRepository, times(1)).save(any());
+
     }
 }

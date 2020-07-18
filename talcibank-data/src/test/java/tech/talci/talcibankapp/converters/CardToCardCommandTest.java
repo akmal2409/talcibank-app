@@ -5,6 +5,7 @@ import org.junit.Test;
 import tech.talci.talcibankapp.commands.CardCommand;
 import tech.talci.talcibankapp.domain.Card;
 import tech.talci.talcibankapp.domain.CardType;
+import tech.talci.talcibankapp.domain.Client;
 import tech.talci.talcibankapp.domain.Currency;
 
 import static org.junit.Assert.*;
@@ -28,10 +29,6 @@ public class CardToCardCommandTest {
         assertNull(converter.convert(null));
     }
 
-    @Test
-    public void testEmptyObject() {
-        assertNotNull(converter.convert(new Card()));
-    }
 
     @Test
     public void convert() {
@@ -41,6 +38,9 @@ public class CardToCardCommandTest {
         card.setHoldersName(HOLDERS_NAME);
         card.setCardType(CARD_TYPE);
         card.setCurrency(CURRENCY);
+        Client client = new Client();
+        client.setId(3L);
+        card.setClient(client);
 
 
         //when

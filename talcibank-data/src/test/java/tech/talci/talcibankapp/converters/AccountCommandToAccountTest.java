@@ -2,9 +2,13 @@ package tech.talci.talcibankapp.converters;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import tech.talci.talcibankapp.commands.AccountCommand;
 import tech.talci.talcibankapp.domain.Account;
 import tech.talci.talcibankapp.domain.AccountType;
+import tech.talci.talcibankapp.repositories.ClientRepository;
+import tech.talci.talcibankapp.services.ClientService;
+import tech.talci.talcibankapp.services.jpa.ClientJpaService;
 
 import static org.junit.Assert.*;
 
@@ -15,10 +19,14 @@ public class AccountCommandToAccountTest {
     public static final AccountType ACCOUNT_TYPE = AccountType.PERSONAL;
 
     AccountCommandToAccount converter;
+    ClientService clientService;
+    @Mock
+    ClientRepository clientRepository;
 
     @Before
     public void setUp() throws Exception {
-        converter = new AccountCommandToAccount();
+        clientService = new ClientJpaService(clientRepository);
+        converter = new AccountCommandToAccount(clientService);
     }
 
     @Test

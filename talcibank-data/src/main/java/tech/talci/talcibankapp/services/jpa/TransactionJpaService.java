@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-@Profile("jpa")
+@Profile({"default", "jpa"})
 @Transactional
 public class TransactionJpaService extends AbstractJpaService<Transaction, TransactionRepository> implements TransactionService {
 

@@ -5,6 +5,7 @@ import org.junit.Test;
 import tech.talci.talcibankapp.commands.AccountCommand;
 import tech.talci.talcibankapp.domain.Account;
 import tech.talci.talcibankapp.domain.AccountType;
+import tech.talci.talcibankapp.domain.Client;
 
 import static org.junit.Assert.*;
 
@@ -27,17 +28,15 @@ public class AccountToAccountCommandTest {
     }
 
     @Test
-    public void testEmptyObject() {
-        assertNotNull(converter.convert(new Account()));
-    }
-
-    @Test
     public void convert() {
         //given
         Account account = new Account();
         account.setId(ID_VALUE);
         account.setName(NAME);
         account.setAccountType(ACCOUNT_TYPE);
+        Client client = new Client();
+        client.setId(2L);
+        account.setClient(client);
 
         //when
         AccountCommand command = converter.convert(account);

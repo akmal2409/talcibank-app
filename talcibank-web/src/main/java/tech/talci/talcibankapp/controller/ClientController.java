@@ -26,4 +26,12 @@ public class ClientController {
 
         return "client/cabinet";
     }
+
+    @GetMapping("cabinet/{clientId}/transactions")
+    public String showTransactions(@PathVariable String clientId, Model model){
+
+        model.addAttribute("client", clientService.findById(Long.valueOf(clientId)));
+
+        return "client/transactions";
+    }
 }

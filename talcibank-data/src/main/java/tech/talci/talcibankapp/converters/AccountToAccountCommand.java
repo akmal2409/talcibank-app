@@ -22,6 +22,11 @@ public class AccountToAccountCommand implements Converter<Account, AccountComman
         command.setAccountType(source.getAccountType());
         command.setName(source.getName());
         command.setId(source.getId());
+
+        if(source.getClient().getId() != null){
+            command.setClientID(source.getClient().getId());
+        }
+
         return command;
     }
 }

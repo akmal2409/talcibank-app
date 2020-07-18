@@ -7,6 +7,7 @@ import tech.talci.talcibankapp.commands.AccountCommand;
 import tech.talci.talcibankapp.commands.TransactionCommand;
 import tech.talci.talcibankapp.domain.Currency;
 import tech.talci.talcibankapp.domain.Transaction;
+import tech.talci.talcibankapp.services.ClientService;
 
 import static org.junit.Assert.*;
 
@@ -20,11 +21,11 @@ public class TransactionCommandToTransactionTest {
     public static final Currency CURRENCY = Currency.DOLLAR;
 
     TransactionCommandToTransaction converter;
-
+    ClientService clientService;
 
     @Before
     public void setUp() throws Exception {
-        converter = new TransactionCommandToTransaction(new AccountCommandToAccount());
+        converter = new TransactionCommandToTransaction(new AccountCommandToAccount(clientService));
     }
 
     @Test

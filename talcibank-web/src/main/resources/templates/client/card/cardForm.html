@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Manage Account</title>
+    <title>Issue a new Card</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
@@ -19,18 +19,18 @@
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form  th:object="${account}" th:action="@{/client/account}" method="post">
+            <form  th:object="${card}" th:action="@{/client/cards}" method="post">
                 <input type="hidden" th:field="*{id}"/>
                 <div class="pannel-group">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h1 class="panel-title">Edit Account Information</h1>
+                            <h1 class="panel-title">Edit Card Information</h1>
                         </div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-3 form-group">
-                                    <label>Account's Name:</label>
-                                    <input type="text" class="form-control" th:field="*{name}"/>
+                                    <label>Holder's Name:</label>
+                                    <input type="text" class="form-control" th:field="*{holdersName}"/>
                                 </div>
                             </div>
                             <div class="row">
@@ -39,9 +39,17 @@
                                     <input type="text" class="form-control" th:field="*{clientID}"/>
                                 </div>
                                 <div class="col-md-3 form-group">
-                                    <label>Account Type:</label>
-                                    <select class="form-control" th:field="*{accountType}">
-                                        <option th:each="typeValue: ${T(tech.talci.talcibankapp.domain.AccountType).values()}"
+                                    <label>Card Type:</label>
+                                    <select class="form-control" th:field="*{cardType}">
+                                        <option th:each="typeValue: ${T(tech.talci.talcibankapp.domain.CardType).values()}"
+                                                th:value="${typeValue.name()}"
+                                                th:text="${typeValue.name()}">val</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label>Currency:</label>
+                                    <select class="form-control" th:field="*{currency}">
+                                        <option th:each="typeValue: ${T(tech.talci.talcibankapp.domain.Currency).values()}"
                                                 th:value="${typeValue.name()}"
                                                 th:text="${typeValue.name()}">val</option>
                                     </select>
@@ -50,12 +58,11 @@
                         </div>
                     </div>
                     <div class="panel panel-primary">
-                    <button type="submit" class="btn btn-primary">Create a new Account</button>
-                </div>
+                        <button type="submit" class="btn btn-primary">Issue a new Card</button>
+                    </div>
             </form>
         </div>
     </div>
 </div>
-
 </body>
 </html>

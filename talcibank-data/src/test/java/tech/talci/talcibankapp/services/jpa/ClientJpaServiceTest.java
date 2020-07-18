@@ -5,6 +5,9 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import tech.talci.talcibankapp.commands.ClientCommand;
+import tech.talci.talcibankapp.converters.AccountCommandToAccount;
+import tech.talci.talcibankapp.converters.AccountToAccountCommand;
 import tech.talci.talcibankapp.domain.Client;
 import tech.talci.talcibankapp.repositories.CardRepository;
 import tech.talci.talcibankapp.repositories.ClientRepository;
@@ -29,7 +32,6 @@ public class ClientJpaServiceTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-
         clientService = new ClientJpaService(clientRepository);
     }
 
@@ -67,4 +69,23 @@ public class ClientJpaServiceTest {
         assertEquals(id, returnedClient.getId());
         verify(clientRepository, times(1)).findByPhoneNumber(anyString());
     }
+
+    @Test
+    public void testFindCommandById() {
+        //given
+        Client client = new Client();
+        client.setId(2L);
+
+        Optional<Client> clientOptional = Optional.of(client);
+
+        //when
+        when(clientRepository.findById(anyLong())).thenReturn(clientOptional);
+
+        //then
+        ClientCommand clientCommand = clientService.findCommandById(2L);
+        assertEquals(client.getId(), clientCommand.getId());
+
+        verify(clientRepository, times(1)).findById(anyLong());
+    }
+
 }

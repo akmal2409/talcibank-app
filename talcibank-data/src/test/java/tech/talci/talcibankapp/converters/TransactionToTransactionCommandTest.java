@@ -5,6 +5,7 @@ import org.junit.Test;
 import tech.talci.talcibankapp.commands.AccountCommand;
 import tech.talci.talcibankapp.commands.TransactionCommand;
 import tech.talci.talcibankapp.domain.Account;
+import tech.talci.talcibankapp.domain.Client;
 import tech.talci.talcibankapp.domain.Currency;
 import tech.talci.talcibankapp.domain.Transaction;
 
@@ -47,6 +48,7 @@ public class TransactionToTransactionCommandTest {
         transaction.setRecipient(RECIPIENT);
         Account account = new Account();
         account.setId(SENDER_ID);
+        account.setClient(new Client());
         transaction.setSender(account);
 
         //when

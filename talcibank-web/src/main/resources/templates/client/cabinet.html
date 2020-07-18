@@ -25,7 +25,7 @@
             <h4>John's Blog</h4>
             <ul class="nav nav-pills nav-stacked">
                 <li class="active"><a href="#section1">Home</a></li>
-                <li><a href="#section2">Link 1</a></li>
+                <li><a th:href="@{'/client/' + ${client.id} + '/account/new'}">Open New Account</a></li>
                 <li><a href="#section3">Link 2</a></li>
                 <li><a href="#section3">Lin 3</a></li>
             </ul><br>
@@ -91,7 +91,7 @@
             <hr>
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <a href="#">
+                    <a th:href="@{'/cabinet/' + ${client.id} + '/transactions' }">
                         <button class="btn btn-info">View Transactions</button>
                     </a>
                     <h4 class="panel-title" style="margin-left: 150px; margin-top: -25px; margin-bottom: 10px">Your Accounts</h4>
@@ -125,7 +125,7 @@
 
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <a href="#">
+                    <a th:href="@{'/client/' + ${client.id} + '/cards/new'}">
                         <button class="btn btn-info">Issue a new card</button>
                     </a>
                     <h4 class="panel-title" style="margin-left: 150px; margin-top: -25px; margin-bottom: 10px">Your Cards</h4>
