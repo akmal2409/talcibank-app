@@ -9,8 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(exclude = {"client", "transactions"})
 @Builder
 @Entity

@@ -39,6 +39,7 @@ public class DataLoader implements CommandLineRunner {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         akmal.setFirstName("Akmal");
+        akmal.setActive(true);
         akmal.setLastName("Ali");
         akmal.setAddress("Podmilscakova 55b, Ljubljna");
         akmal.setBirthDate(LocalDate.parse("28-05-1999", formatter));

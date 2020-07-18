@@ -8,7 +8,8 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = {"cards", "accounts"})
@@ -36,6 +37,9 @@ public class Client {
     @Column(name = "password")
     private String password;
 
+    @Lob
+    private Byte[] image;
+
     @Column(name = "phone_number")
     private String phoneNumber;
 
@@ -44,6 +48,9 @@ public class Client {
 
     @Column(name = "secret_phrase")
     private String secretPhrase;
+
+    @Column(name = "active")
+    private boolean active = false;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
     private Set<Card> cards = new HashSet<>();
