@@ -1,7 +1,8 @@
 package tech.talci.talcibankapp.controller;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,7 +29,7 @@ class ClientControllerTest {
 
     MockMvc mockMvc;
 
-    @BeforeEach
+    @Before
     void setUp() {
         MockitoAnnotations.initMocks(this);
         controller = new ClientController(clientService);
@@ -66,5 +67,10 @@ class ClientControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("client/transactions"))
                 .andExpect(model().attributeExists("client"));
+    }
+
+    @Test
+    public void testUpdateProfile() {
+
     }
 }

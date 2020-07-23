@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,6 +35,9 @@ public class Account {
     @Column(name = "balance")
     private double balance;
 
+    @Column(name = "created_at")
+    private Date createdAt;
+
     @Enumerated(value = EnumType.STRING)
     private AccountType accountType;
 
@@ -43,5 +47,10 @@ public class Account {
 
     public void addTransaction(Transaction transaction){
         transactions.add(transaction);
+    }
+
+    @PrePersist
+    public void createdAt(){
+        this.createdAt = new Date();
     }
 }

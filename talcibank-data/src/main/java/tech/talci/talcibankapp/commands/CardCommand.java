@@ -1,5 +1,6 @@
 package tech.talci.talcibankapp.commands;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,4 +24,7 @@ public class CardCommand {
 
     @NotBlank(message = "Client ID cannot be blank")
     private Long clientID;
+
+    @NotBlank(message = "CVV cannot be blank")
+    private int CVV;
 }

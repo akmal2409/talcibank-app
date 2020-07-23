@@ -1,5 +1,6 @@
 package tech.talci.talcibankapp.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import tech.talci.talcibankapp.services.CardService;
 
 import javax.management.modelmbean.ModelMBeanOperationInfo;
 
+@Slf4j
 @Controller
 public class CardController {
 
@@ -20,18 +22,22 @@ public class CardController {
         this.cardService = cardService;
     }
 
-    @PostMapping("client/cards")
+    @PostMapping("client/card")
     public String saveNewCard(@ModelAttribute CardCommand cardCommand){
 
         CardCommand savedCommand = cardService.saveCardCommand(cardCommand);
 
-        return "redirect:cabinet/" + savedCommand.getClientID();
+        log.debug("Saved new card id :" + savedCommand.getId());
+
+        return "redirect:/cabinet/" + savedCommand.getClientID();
     }
 
     @GetMapping("client/{clientId}/cards/new")
     public String showCardForm(@PathVariable String clientId, Model model){
+        CardCommand cardCommand = new CardCommand();
+        cardCommand.setClientID(Long.valueOf(clientId));
 
-        model.addAttribute("card", new CardCommand());
+        model.addAttribute("card", cardCommand);
 
         return "client/card/cardForm";
     }

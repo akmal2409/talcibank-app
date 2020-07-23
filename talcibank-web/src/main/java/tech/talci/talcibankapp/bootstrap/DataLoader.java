@@ -120,7 +120,6 @@ public class DataLoader implements CommandLineRunner {
 
         transactionRepository.save(tr1);
         transactionRepository.save(tr2);
-
     }
 
 }

@@ -2,10 +2,14 @@ package tech.talci.talcibankapp.converters;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import tech.talci.talcibankapp.commands.CardCommand;
 import tech.talci.talcibankapp.domain.Card;
 import tech.talci.talcibankapp.domain.CardType;
 import tech.talci.talcibankapp.domain.Currency;
+import tech.talci.talcibankapp.services.ClientService;
+import tech.talci.talcibankapp.services.jpa.ClientJpaService;
 
 import javax.swing.plaf.ColorUIResource;
 
@@ -19,10 +23,14 @@ public class CardCommandToCardTest {
     public static final Currency CURRENCY = Currency.DOLLAR;
 
     CardCommandToCard converter;
+    @Mock
+    ClientService clientService;
+
 
     @Before
     public void setUp() throws Exception {
-        converter = new CardCommandToCard();
+        MockitoAnnotations.initMocks(this);
+        converter = new CardCommandToCard(clientService);
     }
 
     @Test

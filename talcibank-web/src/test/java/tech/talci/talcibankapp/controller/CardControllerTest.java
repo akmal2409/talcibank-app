@@ -44,7 +44,7 @@ public class CardControllerTest {
         when(cardService.saveCardCommand(any())).thenReturn(cardCommand);
 
         //then
-        mockMvc.perform(post("/client/cards")
+        mockMvc.perform(post("/client/card")
         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
         .param("id", "2")
         .param("holdersName", "23")
@@ -52,7 +52,7 @@ public class CardControllerTest {
         .param("cardType", "")
         .param("currency", ""))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:cabinet/2"));
+                .andExpect(view().name("redirect:/cabinet/2"));
 
         verify(cardService, times(1)).saveCardCommand(any());
     }

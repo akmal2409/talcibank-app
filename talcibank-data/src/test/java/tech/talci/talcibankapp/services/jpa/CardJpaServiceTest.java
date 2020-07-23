@@ -12,6 +12,7 @@ import tech.talci.talcibankapp.domain.CardType;
 import tech.talci.talcibankapp.domain.Client;
 import tech.talci.talcibankapp.repositories.CardRepository;
 import tech.talci.talcibankapp.services.CardService;
+import tech.talci.talcibankapp.services.ClientService;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -24,6 +25,8 @@ import static org.mockito.Mockito.*;
 public class CardJpaServiceTest {
 
     CardService cardService;
+    @Mock
+    ClientService clientService;
 
     @Mock
     CardRepository cardRepository;
@@ -32,7 +35,7 @@ public class CardJpaServiceTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        cardService = new CardJpaService(cardRepository);
+        cardService = new CardJpaService(cardRepository, clientService);
     }
 
     @Test

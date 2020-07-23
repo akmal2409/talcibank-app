@@ -18,4 +18,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     Set<Transaction> findByRecipient(Long number);
 
     Set<Transaction> findBySender(Account sender);
+
+    Set<Transaction> readTransactionsBySenderAndTimestampBetween(
+            Account sender, Timestamp startDate, Timestamp endDate);
 }

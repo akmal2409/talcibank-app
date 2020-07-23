@@ -23,9 +23,8 @@ public class CardToCardCommand implements Converter<Card, CardCommand> {
         command.setCurrency(source.getCurrency());
         command.setCardType(source.getCardType());
         command.setId(source.getId());
-        if(source.getClient().getId() != null){
-            command.setClientID(source.getClient().getId());
-        }
+        command.setClientID(source.getClient().getId());
+
         return command;
     }
 }

@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -48,6 +49,9 @@ public class Client {
     @Column(name = "secret_phrase")
     private String secretPhrase;
 
+    @Column(name = "created_at")
+    private Date createdAt;
+
     @Column(name = "active")
     private boolean active = false;
 
@@ -66,5 +70,10 @@ public class Client {
     public void addCardTo(Card card){
         card.setClient(this);
         this.cards.add(card);
+    }
+
+    @PrePersist
+    public void createdAt(){
+        this.createdAt = new Date();
     }
 }

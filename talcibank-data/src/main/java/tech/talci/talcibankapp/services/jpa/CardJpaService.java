@@ -10,11 +10,14 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import tech.talci.talcibankapp.repositories.CardRepository;
 import tech.talci.talcibankapp.services.CardService;
+import tech.talci.talcibankapp.services.ClientService;
 
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.Random;
 import java.util.Set;
 
 @Slf4j
@@ -25,13 +28,15 @@ public class CardJpaService extends AbstractJpaService<Card, CardRepository> imp
 
     CardToCardCommand cardToCardCommand;
     CardCommandToCard cardCommandToCard;
+    ClientService clientService;
 
     private Long number = 4023080709087656L;
 
-    public CardJpaService(CardRepository repository) {
+    public CardJpaService(CardRepository repository, ClientService clientService) {
         super(repository);
         cardToCardCommand = new CardToCardCommand();
-        cardCommandToCard = new CardCommandToCard();
+        this.clientService = clientService;
+        cardCommandToCard = new CardCommandToCard(clientService);
     }
 
     @Override
@@ -66,8 +71,16 @@ public class CardJpaService extends AbstractJpaService<Card, CardRepository> imp
     public CardCommand saveCardCommand(CardCommand cardCommand) {
 
         Card detachedCard = cardCommandToCard.convert(cardCommand);
+
         detachedCard.setNumber(number);
         number++;
+
+        detachedCard.setIssued(LocalDate.now());
+        detachedCard.setExpires(LocalDate.now().plusYears(4));
+
+        Random random = new Random();
+        detachedCard.setCVV(random.nextInt(100)+300);
+        detachedCard.setBalance(0.0);
 
         Card savedCard = repository.save(detachedCard);
         log.debug("Saved card id : " + cardCommand.getId());

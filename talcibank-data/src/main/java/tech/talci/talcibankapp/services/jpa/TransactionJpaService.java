@@ -35,4 +35,9 @@ public class TransactionJpaService extends AbstractJpaService<Transaction, Trans
     public Set<Transaction> findBySender(Account sender) {
         return new HashSet<>(repository.findBySender(sender));
     }
+
+    @Override
+    public Set<Transaction> readTransactionsBySenderAndTimestampBetween(Account sender, Timestamp startDate, Timestamp endDate) {
+        return new HashSet<>(repository.readTransactionsBySenderAndTimestampBetween(sender, startDate, endDate));
+    }
 }

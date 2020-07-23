@@ -5,9 +5,16 @@ import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
 import tech.talci.talcibankapp.commands.CardCommand;
 import tech.talci.talcibankapp.domain.Card;
+import tech.talci.talcibankapp.domain.Client;
 import tech.talci.talcibankapp.services.ClientService;
 
 public class CardCommandToCard implements Converter<CardCommand, Card> {
+
+    ClientService clientService;
+
+    public CardCommandToCard(ClientService clientService) {
+        this.clientService = clientService;
+    }
 
     @Nullable
     @Synchronized
@@ -23,6 +30,7 @@ public class CardCommandToCard implements Converter<CardCommand, Card> {
         card.setCardType(source.getCardType());
         card.setHoldersName(source.getHoldersName());
         card.setId(source.getId());
+        card.setClient(clientService.findById(source.getClientID()));
         return card;
     }
 }

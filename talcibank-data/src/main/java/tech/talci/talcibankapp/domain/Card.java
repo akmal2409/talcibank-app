@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -43,8 +44,19 @@ public class Card {
     @Column(name = "balance")
     private Double balance;
 
+    @Column(name = "created_at")
+    private Date createdAt;
+
+    @Column(name = "CVV")
+    private int CVV;
+
 
     public void setHoldersName(String name){
         holdersName = name;
+    }
+
+    @PrePersist
+    public void createdAt(){
+        this.createdAt = new Date();
     }
 }
