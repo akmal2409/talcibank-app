@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import tech.talci.talcibankapp.commands.CardCommand;
+import tech.talci.talcibankapp.domain.Card;
+import tech.talci.talcibankapp.domain.Client;
 import tech.talci.talcibankapp.services.CardService;
 
 import static org.junit.Assert.*;
@@ -72,5 +74,15 @@ public class CardControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("client/card/cardForm"))
                 .andExpect(model().attributeExists("card"));
+    }
+
+    @Test
+    public void testDeleteCard() throws Exception{
+        //when
+        mockMvc.perform(get("/client/1/card/1/delete"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/cabinet/1"));
+
+        verify(cardService, times(1)).deleteById(anyLong());
     }
 }

@@ -17,7 +17,17 @@
             crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<div class="container-fluid" style="margin-top: 10px" th:each="account : ${client.getAccounts()}">
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-3 sidenav">
+            <img th:src="@{/images/logoLarge.png}" alt="logo">
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a th:href="@{'/cabinet/' + ${client.id}}">Home</a></li>
+                <li><a th:href="@{'/client/' + ${client.id} + '/account/new'}">Open New Account</a></li>
+                <li><a th:href="@{'/client/' + ${client.id} + '/cards/new'}">Issue a new Card</a></li>
+            </ul><br>
+        </div>
+<div class="container-fluid" style="margin-top: 16%" th:each="account : ${client.getAccounts()}">
     <div class="row">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -50,5 +60,6 @@
         </div>
     </div>
 </div>
+    </div>
 </body>
 </html>

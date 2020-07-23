@@ -17,6 +17,15 @@
 </head>
 <body>
 <div class="container-fluid" style="margin-top: 20px">
+    <div class="row content">
+        <div class="col-sm-3 sidenav">
+            <img th:src="@{/images/logoLarge.png}" alt="logo">
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a th:href="@{'/cabinet/' + ${card.getClientID()}}">Home</a></li>
+                <li><a th:href="@{'/client/' + ${card.getClientID()} + '/account/new'}">Open New Account</a></li>
+                <li><a th:href="@{'/client/' + ${card.getClientID()} + '/cards/new'}">Issue a new Card</a></li>
+            </ul><br>
+        </div>
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <form  th:object="${card}" th:action="@{/client/card}" method="post">
@@ -57,9 +66,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-primary">
-                        <button type="submit" class="btn btn-primary">Issue a new Card</button>
-                    </div>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 10px">Issue a new Card</button>
             </form>
         </div>
     </div>

@@ -41,4 +41,12 @@ public class CardController {
 
         return "client/card/cardForm";
     }
+
+    @GetMapping("client/{clientId}/card/{cardId}/delete")
+    public String deleteCard(@PathVariable Long clientId,
+                             @PathVariable Long cardId){
+        cardService.deleteById(cardId);
+
+        return "redirect:/cabinet/" + clientId;
+    }
 }
