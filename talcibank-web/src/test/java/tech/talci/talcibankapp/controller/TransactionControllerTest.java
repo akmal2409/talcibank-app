@@ -89,5 +89,17 @@ public class TransactionControllerTest {
 
     }
 
+    @Test
+    public void testGetDepositForm() throws Exception{
+        //when
+        when(accountService.findById(anyLong())).thenReturn(account);
 
+        //then
+        mockMvc.perform(get("/client/1/account/3/deposit"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("account"))
+                .andExpect(view().name("client/account/depositForm"));
+
+        verify(accountService, times(1)).findById(anyLong());
+    }
 }
