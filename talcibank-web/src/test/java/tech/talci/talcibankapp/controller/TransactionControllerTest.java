@@ -75,6 +75,22 @@ public class TransactionControllerTest {
     }
 
     @Test
+    public void testProcessTransferForm() throws Exception{
+        //when
+        when(accountService.findById(anyLong())).thenReturn(account);
+
+        //then
+        mockMvc.perform(post("/client/1/account/3/transfer")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("amount", "10")
+                .param("recipient", "2312323"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/cabinet/1"));
+
+        verify(accountService, times(1)).findById(anyLong());
+    }
+
+    @Test
     public void testGetWithdrawalForm() throws Exception{
         //when
         when(accountService.findById(anyLong())).thenReturn(account);
@@ -87,6 +103,21 @@ public class TransactionControllerTest {
 
         verify(accountService, times(1)).findById(anyLong());
 
+    }
+
+    @Test
+    public void testProcessWithdrawalForm() throws Exception{
+        //when
+        when(accountService.findById(anyLong())).thenReturn(account);
+
+        //then
+        mockMvc.perform(post("/client/1/account/3/withdraw")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("amount", "10"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/cabinet/1"));
+
+        verify(accountService, times(1)).findById(anyLong());
     }
 
     @Test
@@ -103,13 +134,16 @@ public class TransactionControllerTest {
         verify(accountService, times(1)).findById(anyLong());
     }
 
+
     @Test
     public void testProcessDepositForm() throws Exception{
         //when
         when(accountService.findById(anyLong())).thenReturn(account);
 
         //then
-        mockMvc.perform(post("/client/1/account/3/deposit"))
+        mockMvc.perform(post("/client/1/account/3/deposit")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("amount", "10"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/cabinet/1"));
 

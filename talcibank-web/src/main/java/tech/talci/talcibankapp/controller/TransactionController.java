@@ -147,8 +147,27 @@ public class TransactionController {
         return "client/account/depositForm";
     }
 
-    public String processDepositForm(){
+    @PostMapping("/deposit")
+    public String processDepositForm(@PathVariable Long clientId,
+                                     @Valid Deposit deposit, Account account, BindingResult result){
 
+        deposit.setAccount(account);
+        if(result.hasErrors()){
+            return "client/account/depositForm";
+        } else if(deposit.getAmount() < 1){
+
+            result.rejectValue("amount", "amount", "Incorrect amount");
+            return "client/account/depositForm";
+        } else{
+            deposit.setDate(Date.valueOf(LocalDate.now()));
+            account.getDeposits().add(deposit);
+            account.setBalance(account.getBalance() + deposit.getAmount());
+
+            depositService.save(deposit);
+            accountService.save(account);
+
+            return "redirect:/cabinet/" + clientId;
+        }
     }
 
 }

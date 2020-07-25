@@ -61,7 +61,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-3 form-group">
-                                    <label>Send to: (Account number)</label>
+                                    <label>Currency</label>
                                     <select class="form-control" th:field="*{currency}">
                                         <option th:each="type: ${T(tech.talci.talcibankapp.domain.Currency).values()}"
                                                 th:value="${type.name()}"
