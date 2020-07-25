@@ -36,7 +36,7 @@
                                 <div class="col-md-3 form-group">
                                     <label>Amount</label>
                                     <input type="text" class="form-control" th:field="*{amount}">
-                                    <td th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">Recipient Error</td>
+                                    <td th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">Amount Error</td>
                                 </div>
                             </div>
                             <div class="row">

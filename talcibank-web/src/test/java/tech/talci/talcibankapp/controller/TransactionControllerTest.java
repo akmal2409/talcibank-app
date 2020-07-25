@@ -149,4 +149,32 @@ public class TransactionControllerTest {
 
         verify(accountService, times(1)).findById(anyLong());
     }
+
+    @Test
+    public void testGetWithdrawalHistory() throws Exception{
+        //when
+        when(clientService.findById(anyLong())).thenReturn(client);
+
+        //then
+        mockMvc.perform(get("/client/1/withdrawals"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("client"))
+                .andExpect(view().name("client/account/withdrawalHistory"));
+
+        verify(clientService, times(1)).findById(anyLong());
+    }
+
+    @Test
+    public void testGetDepositHistory() throws Exception{
+        //when
+        when(clientService.findById(anyLong())).thenReturn(client);
+
+        //then
+        mockMvc.perform(get("/client/1/deposits"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("client"))
+                .andExpect(view().name("client/account/depositHistory"));
+
+        verify(clientService, times(1)).findById(anyLong());
+    }
 }
