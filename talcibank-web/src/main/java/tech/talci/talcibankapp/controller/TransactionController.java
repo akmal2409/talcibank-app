@@ -9,6 +9,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import tech.talci.talcibankapp.domain.Account;
 import tech.talci.talcibankapp.domain.Transaction;
+import tech.talci.talcibankapp.domain.Withdrawal;
 import tech.talci.talcibankapp.services.AccountService;
 import tech.talci.talcibankapp.services.ClientService;
 import tech.talci.talcibankapp.services.TransactionService;
@@ -89,8 +90,14 @@ public class TransactionController {
         return "redirect:/cabinet/" + clientId;
     }
 
+    @GetMapping("/withdraw")
     public String getWithdrawalForm(@PathVariable Long accountId, Model model){
 
+        Withdrawal withdrawal = new Withdrawal();
+        withdrawal.setAccount(accountService.findById(accountId));
+        model.addAttribute("withdrawal", withdrawal);
+
+        return "client/account/withdrawalForm";
     }
 
 }

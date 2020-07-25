@@ -80,7 +80,7 @@ public class TransactionControllerTest {
         //then
         mockMvc.perform(get("/client/1/account/3/withdraw"))
                 .andExpect(status().isOk())
-                .andExpect(model().attributeExists("account"))
+                .andExpect(model().attributeExists("withdraw"))
                 .andExpect(view().name("client/account/withdrawalForm"));
 
         verify(accountService, times(1)).findById(anyLong());
