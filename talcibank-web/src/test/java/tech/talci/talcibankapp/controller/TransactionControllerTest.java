@@ -97,7 +97,7 @@ public class TransactionControllerTest {
         //then
         mockMvc.perform(get("/client/1/account/3/deposit"))
                 .andExpect(status().isOk())
-                .andExpect(model().attributeExists("account"))
+                .andExpect(model().attributeExists("deposit"))
                 .andExpect(view().name("client/account/depositForm"));
 
         verify(accountService, times(1)).findById(anyLong());

@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import tech.talci.talcibankapp.domain.Account;
+import tech.talci.talcibankapp.domain.Deposit;
 import tech.talci.talcibankapp.domain.Transaction;
 import tech.talci.talcibankapp.domain.Withdrawal;
 import tech.talci.talcibankapp.services.*;
@@ -15,8 +16,10 @@ import tech.talci.talcibankapp.validators.TransactionValidator;
 import tech.talci.talcibankapp.validators.WithdrawalValidator;
 
 import javax.validation.Valid;
+import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Controller
@@ -44,12 +47,17 @@ public class TransactionController {
         dataBinder.setDisallowedFields("id");
     }
 
+    @ModelAttribute("account")
+    public Account getAccount(@PathVariable Long accountId){
+        return accountService.findById(accountId);
+    }
+
     @GetMapping("/transfer")
     public String getTransferForm(@PathVariable Long accountId,
-                                  Model model){
+                                  Model model, Account account){
 
         Transaction transaction = new Transaction();
-        transaction.setSender(accountService.findById(accountId));
+        transaction.setSender(account);
         model.addAttribute("transaction", transaction);
 
         return "client/account/transferForm";
@@ -57,10 +65,10 @@ public class TransactionController {
 
     @PostMapping("/transfer")
     public String processTransferForm(@Valid Transaction transaction, BindingResult result,
-                                      @PathVariable Long clientId, @PathVariable Long accountId){
+                                      @PathVariable Long clientId, Account account){
 
         TransactionValidator validator = new TransactionValidator();
-        transaction.setSender(accountService.findById(accountId));
+        transaction.setSender(account);
         Long recipientNumber = Long.valueOf(transaction.getRecipient());
         Double amount = Double.valueOf(transaction.getAmount());
         if(result.hasErrors()){
@@ -95,10 +103,10 @@ public class TransactionController {
     }
 
     @GetMapping("/withdraw")
-    public String getWithdrawalForm(@PathVariable Long accountId, Model model){
+    public String getWithdrawalForm(Account account, Model model){
 
         Withdrawal withdrawal = new Withdrawal();
-        withdrawal.setAccount(accountService.findById(accountId));
+        withdrawal.setAccount(account);
         model.addAttribute("withdrawal", withdrawal);
 
         return "client/account/withdrawalForm";
@@ -106,10 +114,9 @@ public class TransactionController {
 
     @PostMapping("/withdraw")
     public String processWithdrawalForm(@PathVariable Long accountId, @PathVariable Long clientId,
-                                        @Valid Withdrawal withdrawal, BindingResult result){
+                                        @Valid Withdrawal withdrawal, Account account, BindingResult result){
 
         WithdrawalValidator validator = new WithdrawalValidator();
-        Account account = accountService.findById(accountId);
         withdrawal.setAccount(account);
 
         if(result.hasErrors()){
@@ -118,6 +125,7 @@ public class TransactionController {
             result.rejectValue("amount", "amount", "Exceeding or not enough");
             return "client/account/withdrawalForm";
         } else{
+            withdrawal.setDate(Date.valueOf(LocalDate.now()));
             account.getWithdrawals().add(withdrawal);
             account.setBalance(account.getBalance() - withdrawal.getAmount());
 
@@ -128,6 +136,15 @@ public class TransactionController {
         }
     }
 
+    @GetMapping("/deposit")
+    public String getDepositForm(@PathVariable Long accountId, @PathVariable Long clientId,
+                                 Model model, Account account){
 
+        Deposit deposit = new Deposit();
+        deposit.setAccount(account);
+        model.addAttribute("deposit", deposit);
+
+        return "client/account/depositForm";
+    }
 
 }
