@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Account</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-3 sidenav">
+            <img th:src="@{/images/logoLarge.png}" alt="logo">
+            <ul class="nav nav-pills nav-stacked">
+                <li><a th:href="@{'/cabinet/' + ${account.getClientId()}}">Home</a></li>
+                <li><a th:href="@{'/client/' + ${account.getClientId()} + '/account/new'}">Open New Account</a></li>
+                <li><a th:href="@{'/client/' + ${account.getClientId()} + '/cards/new'}">Issue a new Card</a></li>
+            </ul><br>
+        </div>
+        <div class="container-fluid" style="margin-top: 16%">
+            <div class="row">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title" th:text="'Account Overview (' + ${account.name} + ')'">Account Overview</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="thead-inverse">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Account Name</th>
+                                    <th>Account Type</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Currency</th>
+                                </tr>
+                                </thead>
+                                <tr th:each="trans : ${account.getTransactions()}">
+                                    <td th:text="${trans.id}">2</td>
+                                    <td th:text="${trans.timestamp}">2312</td>
+                                    <td th:text="${trans.recipient}">3123</td>
+                                    <td th:text="${trans.description}">231</td>
+                                    <td th:text="${trans.amount}">231</td>
+                                    <td th:text="${trans.currency}"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

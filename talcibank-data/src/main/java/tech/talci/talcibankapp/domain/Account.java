@@ -9,7 +9,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {"client", "transactions"})
@@ -43,6 +44,12 @@ public class Account {
 
     @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Transaction> transactions = new HashSet<>();
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Withdrawal> withdrawals = new HashSet<>();
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Deposit> deposits = new HashSet<>();
 
 
     public void addTransaction(Transaction transaction){

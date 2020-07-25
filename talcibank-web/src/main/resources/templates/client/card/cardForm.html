@@ -21,10 +21,15 @@
         <div class="col-sm-3 sidenav">
             <img th:src="@{/images/logoLarge.png}" alt="logo">
             <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a th:href="@{'/cabinet/' + ${card.getClientID()}}">Home</a></li>
+                <li><a th:href="@{'/cabinet/' + ${card.getClientID()}}">Home</a></li>
                 <li><a th:href="@{'/client/' + ${card.getClientID()} + '/account/new'}">Open New Account</a></li>
-                <li><a th:href="@{'/client/' + ${card.getClientID()} + '/cards/new'}">Issue a new Card</a></li>
+                <li class="active"><a th:href="@{'/client/' + ${card.getClientID()} + '/cards/new'}">Issue a new Card</a></li>
             </ul><br>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-1" style="margin-top: 60px">
+                <img th:src="@{/images/card.png}">
+            </div>
         </div>
     <div class="row">
         <div class="col-md-6 col-md-offset-3">

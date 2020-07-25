@@ -24,7 +24,7 @@
         <div class="col-sm-3 sidenav">
             <img th:src="@{/images/logoLarge.png}" alt="logo">
             <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#section1">Home</a></li>
+                <li class="active"><a th:href="@{'/cabinet/' + ${client.id}}">Home</a></li>
                 <li><a th:href="@{'/client/' + ${client.id} + '/account/new'}">Open New Account</a></li>
                 <li><a th:href="@{'/client/' + ${client.id} + '/cards/new'}">Issue a new Card</a></li>
             </ul><br>
@@ -114,7 +114,55 @@
                                 <td th:text="${account.name}">SD</td>
                                 <td th:text="${account.balance}">SD</td>
                                 <td th:text="${account.getAccountType().toString()}">SD</td>
-                                <td><a href="#"><button class="btn btn-success">Manage</button></a></td>
+                                <td><a><button class="btn btn-success" data-toggle="modal" data-target="#manageAccount">Manage</button></a></td>
+                                <div id="manageAccount" class="modal fade" role="dialog">
+                                    <div class="modal-dialog" style="margin-top: 150px">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Manage account</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-1 ">
+                                                        <a th:href="@{'/client/' + ${client.id} + '/account/' + ${account.id} + '/delete'}">
+                                                            <button style="width: 570px; height: 50px" class="btn btn-danger" type="button">Delete Account</button>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-md-10 col-md-offset-3 text-info">
+                                                        <h5 class="" th:text="'Account number: ' + ${account.number} + ' will be deleted permamently'"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                        <a th:href="@{'/client/' + ${client.id} + '/account/' + ${account.id} + '/withdraw'}">
+                                                            <button style="width: 570px; height: 50px" class="btn btn-danger" type="button">Withdraw</button>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-md-10 col-md-offset-3 text-info">
+                                                        <h5 class="" th:text="'Westernunion, Cash etc'"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                        <a th:href="@{'/client/' + ${client.id} + '/account/' + ${account.id} + '/deposit'}">
+                                                            <button style="width: 570px; height: 50px" class="btn btn-success" type="button">Deposit</button>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-md-10 col-md-offset-3 text-info">
+                                                        <h5 class="" th:text="'With visa/mastercard/amex/bank transfer'"></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </tr>
                         </table>
                     </div>

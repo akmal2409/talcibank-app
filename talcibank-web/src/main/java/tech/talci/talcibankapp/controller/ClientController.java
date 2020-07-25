@@ -5,11 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import tech.talci.talcibankapp.services.ClientService;
 
 @Slf4j
 @Controller
+@RequestMapping("/cabinet")
 public class ClientController {
 
     private final ClientService clientService;
@@ -18,7 +20,7 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @GetMapping("cabinet/{clientId}")
+    @GetMapping("/{clientId}")
     public String getUserCabinet(@PathVariable String clientId, Model model){
 
         model.addAttribute("client", clientService.findById(Long.valueOf(clientId)));
@@ -27,7 +29,7 @@ public class ClientController {
         return "client/cabinet";
     }
 
-    @GetMapping("cabinet/{clientId}/transactions")
+    @GetMapping("/{clientId}/transactions")
     public String showTransactions(@PathVariable String clientId, Model model){
 
         model.addAttribute("client", clientService.findById(Long.valueOf(clientId)));

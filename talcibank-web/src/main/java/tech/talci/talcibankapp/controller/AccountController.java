@@ -2,10 +2,7 @@ package tech.talci.talcibankapp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import tech.talci.talcibankapp.commands.AccountCommand;
 import tech.talci.talcibankapp.commands.ClientCommand;
 import tech.talci.talcibankapp.domain.Client;
@@ -15,6 +12,7 @@ import tech.talci.talcibankapp.services.ClientService;
 import javax.persistence.Column;
 
 @Controller
+@RequestMapping("/client")
 public class AccountController {
 
     private final AccountService accountService;
@@ -25,7 +23,7 @@ public class AccountController {
         this.clientService = clientService;
     }
 
-    @GetMapping("client/{clientId}/account/new")
+    @GetMapping("/{clientId}/account/new")
     public String createNewAccount(@PathVariable String clientId, Model model){
 
         ClientCommand clientCommand = clientService.findCommandById(Long.valueOf(clientId));
@@ -37,7 +35,7 @@ public class AccountController {
         return "client/account/accountForm";
     }
 
-    @PostMapping("client/account")
+    @PostMapping("/account")
     public String saveOrUpdate(@ModelAttribute AccountCommand command){
 
         AccountCommand savedCommand = accountService.saveAccountCommand(command);

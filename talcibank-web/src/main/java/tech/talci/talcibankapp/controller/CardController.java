@@ -3,10 +3,7 @@ package tech.talci.talcibankapp.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import tech.talci.talcibankapp.commands.CardCommand;
 import tech.talci.talcibankapp.services.CardService;
 
@@ -14,6 +11,7 @@ import javax.management.modelmbean.ModelMBeanOperationInfo;
 
 @Slf4j
 @Controller
+@RequestMapping("/client")
 public class CardController {
 
     private final CardService cardService;
@@ -22,7 +20,7 @@ public class CardController {
         this.cardService = cardService;
     }
 
-    @PostMapping("client/card")
+    @PostMapping("/card")
     public String saveNewCard(@ModelAttribute CardCommand cardCommand){
 
         CardCommand savedCommand = cardService.saveCardCommand(cardCommand);
@@ -32,7 +30,7 @@ public class CardController {
         return "redirect:/cabinet/" + savedCommand.getClientID();
     }
 
-    @GetMapping("client/{clientId}/cards/new")
+    @GetMapping("/{clientId}/cards/new")
     public String showCardForm(@PathVariable String clientId, Model model){
         CardCommand cardCommand = new CardCommand();
         cardCommand.setClientID(Long.valueOf(clientId));
@@ -42,7 +40,7 @@ public class CardController {
         return "client/card/cardForm";
     }
 
-    @GetMapping("client/{clientId}/card/{cardId}/delete")
+    @GetMapping("/{clientId}/card/{cardId}/delete")
     public String deleteCard(@PathVariable Long clientId,
                              @PathVariable Long cardId){
         cardService.deleteById(cardId);
