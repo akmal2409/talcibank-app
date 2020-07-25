@@ -102,4 +102,17 @@ public class TransactionControllerTest {
 
         verify(accountService, times(1)).findById(anyLong());
     }
+
+    @Test
+    public void testProcessDepositForm() throws Exception{
+        //when
+        when(accountService.findById(anyLong())).thenReturn(account);
+
+        //then
+        mockMvc.perform(post("/client/1/account/3/deposit"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/cabinet/1"));
+
+        verify(accountService, times(1)).findById(anyLong());
+    }
 }

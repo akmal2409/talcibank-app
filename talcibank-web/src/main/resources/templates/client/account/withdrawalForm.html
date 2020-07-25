@@ -27,7 +27,7 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h4 th:text="'Current account: ' + ${withdrawal.getAccount().getName()}">231</h4>
-                            <h4>Transfer your funds to another bank account</h4>
+                            <h4>Withdraw money from your bank account</h4>
                             <i class="glyphicon glyphicon-bitcoin" style="margin-left: 70%"></i>
                             <h4 th:text="'Balance: ' + ${withdrawal.getAccount().getBalance()}" style="margin-left: 70%"></h4>
                         </div>
@@ -41,7 +41,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-3 form-group">
-                                    <label>Send to: (Account number)</label>
+                                    <label>Withdraw to:</label>
                                     <select class="form-control" th:field="*{withdrawalType}">
                                         <option th:each="type: ${T(tech.talci.talcibankapp.domain.WithdrawalType).values()}"
                                                 th:value="${type.name()}"
