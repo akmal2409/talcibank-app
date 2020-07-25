@@ -40,8 +40,10 @@ public class DataLoader implements CommandLineRunner {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         akmal.setFirstName("Akmal");
         akmal.setActive(true);
-        akmal.setLastName("Ali");
-        akmal.setAddress("Podmilscakova 55b, Ljubljna");
+        akmal.setLastName("Alikhujaev");
+        akmal.setAddress("Podmilscakova 55b, Ljubljana");
+        akmal.setEmail("akmalalikhujaev@gmail.com");
+        akmal.setPhoneNumber("+99890978543");
         akmal.setBirthDate(LocalDate.parse("28-05-1999", formatter));
         akmal.setSecretPhrase("2409");
 
@@ -74,7 +76,7 @@ public class DataLoader implements CommandLineRunner {
         Card akmalsCard = new Card();
         akmalsCard.setCardType(CardType.VISA_PLATINUM);
         akmalsCard.setCurrency(Currency.EURO);
-        akmalsCard.setHoldersName("Akmal Ali");
+        akmalsCard.setHoldersName("Akmal Alikhujaev");
         akmalsCard.setClient(akmal);
         akmalsCard.setIssued(LocalDate.parse("23-08-2020", formatter));
         akmalsCard.setExpires(LocalDate.parse("23-08-2023", formatter));

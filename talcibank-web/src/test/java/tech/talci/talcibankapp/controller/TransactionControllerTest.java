@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import tech.talci.talcibankapp.domain.Account;
@@ -39,6 +40,9 @@ public class TransactionControllerTest {
 
     TransactionController controller;
 
+    Client client;
+    Account account;
+
     @Before
     public void setUp() throws Exception {
 
@@ -46,17 +50,17 @@ public class TransactionControllerTest {
         controller = new TransactionController(transactionService, clientService, accountService,
                                 withdrawalService, depositService);
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+
+        client = new Client();
+        client.setId(1L);
+        account = new Account();
+        account.setId(3L);
+        account.setBalance(900.0);
+        account.setClient(client);
     }
 
     @Test
     public void testGetTransferForm() throws Exception{
-        //given
-        Client client = new Client();
-        client.setId(1L);
-        Account account = new Account();
-        account.setId(3L);
-        account.setClient(client);
-
         //when
         when(accountService.findById(anyLong())).thenReturn(account);
 
@@ -72,13 +76,6 @@ public class TransactionControllerTest {
 
     @Test
     public void testGetWithdrawalForm() throws Exception{
-        //given
-        Client client = new Client();
-        client.setId(1L);
-        Account account = new Account();
-        account.setId(3L);
-        account.setClient(client);
-
         //when
         when(accountService.findById(anyLong())).thenReturn(account);
 
@@ -91,4 +88,6 @@ public class TransactionControllerTest {
         verify(accountService, times(1)).findById(anyLong());
 
     }
+
+
 }

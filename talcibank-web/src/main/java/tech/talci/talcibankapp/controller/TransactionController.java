@@ -12,6 +12,7 @@ import tech.talci.talcibankapp.domain.Transaction;
 import tech.talci.talcibankapp.domain.Withdrawal;
 import tech.talci.talcibankapp.services.*;
 import tech.talci.talcibankapp.validators.TransactionValidator;
+import tech.talci.talcibankapp.validators.WithdrawalValidator;
 
 import javax.validation.Valid;
 import java.sql.Time;
@@ -101,6 +102,30 @@ public class TransactionController {
         model.addAttribute("withdrawal", withdrawal);
 
         return "client/account/withdrawalForm";
+    }
+
+    @PostMapping("/withdraw")
+    public String processWithdrawalForm(@PathVariable Long accountId, @PathVariable Long clientId,
+                                        @Valid Withdrawal withdrawal, BindingResult result){
+
+        WithdrawalValidator validator = new WithdrawalValidator();
+        Account account = accountService.findById(accountId);
+        withdrawal.setAccount(account);
+
+        if(result.hasErrors()){
+            return "client/account/withdrawalForm";
+        } else if (!validator.validate(account, withdrawal.getAmount())){
+            result.rejectValue("amount", "amount", "Exceeding or not enough");
+            return "client/account/withdrawalForm";
+        } else{
+            account.getWithdrawals().add(withdrawal);
+            account.setBalance(account.getBalance() - withdrawal.getAmount());
+
+            accountService.save(account);
+            withdrawalService.save(withdrawal);
+
+            return "redirect:/cabinet/" + clientId;
+        }
     }
 
 }
