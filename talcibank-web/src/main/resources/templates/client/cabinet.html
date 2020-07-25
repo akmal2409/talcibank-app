@@ -106,6 +106,7 @@
                                 <th>Balance</th>
                                 <th>Type</th>
                                 <th>Manage Account</th>
+                                <th>Transfer</th>
                             </tr>
                             </thead>
                             <tr th:each="account : ${client.getAccounts()}">
@@ -160,9 +161,11 @@
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
+                                <th><a th:href="@{'/client/' + ${client.id} + '/account/' + ${account.id} + '/transfer'}">
+                                    <button class="btn btn-success">Send Money</button>
+                                </a></th>
                             </tr>
                         </table>
                     </div>

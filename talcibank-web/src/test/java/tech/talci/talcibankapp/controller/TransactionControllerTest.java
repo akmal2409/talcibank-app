@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.startsWith;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -53,14 +53,37 @@ public class TransactionControllerTest {
         account.setClient(client);
 
         //when
-        when(clientService.findById(anyLong())).thenReturn(client);
+        when(accountService.findById(anyLong())).thenReturn(account);
 
         //then
-        mockMvc.perform(get("/client/1/transfer"))
+        mockMvc.perform(get("/client/1/account/3/transfer"))
                 .andExpect(status().isOk())
-                .andExpect(model().attributeExists("client"))
                 .andExpect(model().attributeExists("transaction"))
                 .andExpect(view().name("client/account/transferForm"));
+
+        verify(accountService, times(1)).findById(anyLong());
+
+    }
+
+    @Test
+    public void testGetWithdrawalForm() throws Exception{
+        //given
+        Client client = new Client();
+        client.setId(1L);
+        Account account = new Account();
+        account.setId(3L);
+        account.setClient(client);
+
+        //when
+        when(accountService.findById(anyLong())).thenReturn(account);
+
+        //then
+        mockMvc.perform(get("/client/1/account/3/withdraw"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("account"))
+                .andExpect(view().name("client/account/withdrawalForm"));
+
+        verify(accountService, times(1)).findById(anyLong());
 
     }
 }

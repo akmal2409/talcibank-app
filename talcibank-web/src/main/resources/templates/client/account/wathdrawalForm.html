@@ -20,50 +20,30 @@
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form th:object="${transaction}" method="post" >
+            <form th:object="${withdrawal}" method="post" >
 
                 <input type="hidden" th:field="*{id}"/>
                 <div class="panel-group">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h4 th:text="'Current account: ' + ${transaction.getSender().getName()}">231</h4>
+                            <h4 th:text="'Current account: ' + ${withdrawal.getAccount().getName()}">231</h4>
                             <h4>Transfer your funds to another bank account</h4>
                             <i class="glyphicon glyphicon-bitcoin" style="margin-left: 70%"></i>
-                            <h4 th:text="'Balance: ' + ${transaction.getSender().getBalance()}" style="margin-left: 70%"></h4>
+                            <h4 th:text="'Balance: ' + ${withdrawal.getAccount().getBalance()}" style="margin-left: 70%"></h4>
                         </div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-3 form-group">
-                                    <label>Send to: (Account number)</label>
-                                    <input type="text" class="form-control" th:field="*{recipient}">
-                                    <td th:if="${#fields.hasErrors('recipient')}" th:errors="*{recipient}">Recipient Error</td>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 form-group">
-                                    <label>IBAN: (In case account belongs to another bank)</label>
-                                    <input type="text" class="form-control" th:field="*{iban}">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 form-group">
-                                    <label>Amount: (Cannot exceed your balance)</label>
+                                    <label>SAmount</label>
                                     <input type="text" class="form-control" th:field="*{amount}">
-                                    <td th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">Amount Error</td>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 form-group">
-                                    <label>Note:</label>
-                                    <input type="text" class="form-control" th:field="*{description}">
-                                    <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</td>
+                                    <td th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">Recipient Error</td>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3 form-group">
                                     <label>Send to: (Account number)</label>
-                                    <select class="form-control" th:field="*{currency}">
-                                        <option th:each="type: ${T(tech.talci.talcibankapp.domain.Currency).values()}"
+                                    <select class="form-control" th:field="*{withdrawalType}">
+                                        <option th:each="type: ${T(tech.talci.talcibankapp.domain.WithdrawalType).values()}"
                                                 th:value="${type.name()}"
                                                 th:text="${type.name()}">val</option>
                                     </select>
@@ -72,7 +52,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Transfer Money</button>
+                <button type="submit" class="btn btn-primary">Withdraw Money</button>
             </form>
         </div>
     </div>

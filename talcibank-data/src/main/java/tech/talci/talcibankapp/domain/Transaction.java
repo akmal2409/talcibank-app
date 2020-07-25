@@ -2,8 +2,10 @@ package tech.talci.talcibankapp.domain;
 
 
 import lombok.*;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.sql.Timestamp;
 
 @Data
@@ -37,4 +39,7 @@ public class Transaction{
 
     @Enumerated(value = EnumType.STRING)
     private Currency currency;
+
+    @Column(name = "iban")
+    private String iban;
 }
