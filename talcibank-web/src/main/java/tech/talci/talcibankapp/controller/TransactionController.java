@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import tech.talci.talcibankapp.domain.Account;
 import tech.talci.talcibankapp.domain.Transaction;
 import tech.talci.talcibankapp.domain.Withdrawal;
-import tech.talci.talcibankapp.services.AccountService;
-import tech.talci.talcibankapp.services.ClientService;
-import tech.talci.talcibankapp.services.TransactionService;
+import tech.talci.talcibankapp.services.*;
 import tech.talci.talcibankapp.validators.TransactionValidator;
 
 import javax.validation.Valid;
@@ -24,15 +22,20 @@ import java.time.LocalDateTime;
 @RequestMapping("/client/{clientId}/account/{accountId}")
 public class TransactionController {
 
-    TransactionService transactionService;
-    ClientService clientService;
-    AccountService accountService;
+    private final TransactionService transactionService;
+    private final ClientService clientService;
+    private final AccountService accountService;
+    private final WithdrawalService withdrawalService;
+    private final DepositService depositService;
 
-    public TransactionController(TransactionService transactionService,
-                                 ClientService clientService, AccountService accountService) {
+    public TransactionController(TransactionService transactionService, ClientService clientService,
+                                 AccountService accountService, WithdrawalService withdrawalService,
+                                 DepositService depositService) {
         this.transactionService = transactionService;
         this.clientService = clientService;
         this.accountService = accountService;
+        this.withdrawalService = withdrawalService;
+        this.depositService = depositService;
     }
 
     @InitBinder

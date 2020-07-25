@@ -8,9 +8,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import tech.talci.talcibankapp.domain.Account;
 import tech.talci.talcibankapp.domain.Client;
-import tech.talci.talcibankapp.services.AccountService;
-import tech.talci.talcibankapp.services.ClientService;
-import tech.talci.talcibankapp.services.TransactionService;
+import tech.talci.talcibankapp.services.*;
 
 import static org.junit.Assert.*;
 
@@ -33,13 +31,20 @@ public class TransactionControllerTest {
     @Mock
     ClientService clientService;
 
+    @Mock
+    WithdrawalService withdrawalService;
+
+    @Mock
+    DepositService depositService;
+
     TransactionController controller;
 
     @Before
     public void setUp() throws Exception {
 
         MockitoAnnotations.initMocks(this);
-        controller = new TransactionController(transactionService, clientService, accountService);
+        controller = new TransactionController(transactionService, clientService, accountService,
+                                withdrawalService, depositService);
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
@@ -80,7 +85,7 @@ public class TransactionControllerTest {
         //then
         mockMvc.perform(get("/client/1/account/3/withdraw"))
                 .andExpect(status().isOk())
-                .andExpect(model().attributeExists("withdraw"))
+                .andExpect(model().attributeExists("withdrawal"))
                 .andExpect(view().name("client/account/withdrawalForm"));
 
         verify(accountService, times(1)).findById(anyLong());
