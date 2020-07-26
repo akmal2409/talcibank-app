@@ -3,15 +3,13 @@ package tech.talci.talcibankapp.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import tech.talci.talcibankapp.domain.Client;
 import tech.talci.talcibankapp.services.ClientService;
 
 @Slf4j
 @Controller
-@RequestMapping("/cabinet")
+@RequestMapping("/cabinet/{clientId}")
 public class ClientController {
 
     private final ClientService clientService;
@@ -20,20 +18,41 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @GetMapping("/{clientId}")
-    public String getUserCabinet(@PathVariable String clientId, Model model){
+    @ModelAttribute("client")
+    public Client getClient(@PathVariable Long clientId){
+        return clientService.findById(clientId);
+    }
 
-        model.addAttribute("client", clientService.findById(Long.valueOf(clientId)));
+    @GetMapping
+    public String getUserCabinet(Client client, Model model){
+
+        model.addAttribute("client", client);
         log.debug("Bringing client cabinet");
 
         return "client/cabinet";
     }
 
-    @GetMapping("/{clientId}/transactions")
-    public String showTransactions(@PathVariable String clientId, Model model){
+    @GetMapping("/transactions")
+    public String showTransactions(Client client, Model model){
 
-        model.addAttribute("client", clientService.findById(Long.valueOf(clientId)));
+        model.addAttribute("client", client);
 
         return "client/transactions";
+    }
+
+    @GetMapping("/withdrawals")
+    public String getWithdrawalHistory(Client client, Model model){
+
+        model.addAttribute("client", client);
+
+        return "client/account/withdrawalHistory";
+    }
+
+    @GetMapping("/deposits")
+    public String getDepositHistory(Client client, Model model){
+
+        model.addAttribute("client", client);
+
+        return "client/account/depositHistory";
     }
 }

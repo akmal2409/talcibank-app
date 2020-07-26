@@ -7,10 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import tech.talci.talcibankapp.domain.Account;
-import tech.talci.talcibankapp.domain.Deposit;
-import tech.talci.talcibankapp.domain.Transaction;
-import tech.talci.talcibankapp.domain.Withdrawal;
+import tech.talci.talcibankapp.domain.*;
 import tech.talci.talcibankapp.services.*;
 import tech.talci.talcibankapp.validators.TransactionValidator;
 import tech.talci.talcibankapp.validators.WithdrawalValidator;
@@ -45,6 +42,11 @@ public class TransactionController {
     @InitBinder
     public void setAllowedFields(WebDataBinder dataBinder){
         dataBinder.setDisallowedFields("id");
+    }
+
+    @ModelAttribute("client")
+    public Client getClient(@PathVariable Long clientId){
+        return clientService.findById(clientId);
     }
 
     @ModelAttribute("account")
