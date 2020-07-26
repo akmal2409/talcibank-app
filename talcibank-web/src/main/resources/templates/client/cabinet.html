@@ -27,6 +27,8 @@
                 <li class="active"><a th:href="@{'/cabinet/' + ${client.id}}">Home</a></li>
                 <li><a th:href="@{'/client/' + ${client.id} + '/account/new'}">Open New Account</a></li>
                 <li><a th:href="@{'/client/' + ${client.id} + '/cards/new'}">Issue a new Card</a></li>
+                <li><a th:href="@{'/cabinet/' + ${client.id} + '/withdrawals'}">Withdrawal History</a></li>
+                <li><a th:href="@{'/cabinet/' + ${client.id} + '/deposits'}">Deposit History</a></li>
             </ul><br>
         </div>
 
