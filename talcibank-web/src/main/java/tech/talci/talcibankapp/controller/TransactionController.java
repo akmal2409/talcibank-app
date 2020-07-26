@@ -1,7 +1,6 @@
 package tech.talci.talcibankapp.controller;
 
-import javafx.util.converter.TimeStringConverter;
-import org.springframework.context.annotation.ComponentScan;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,7 +13,6 @@ import tech.talci.talcibankapp.validators.WithdrawalValidator;
 
 import javax.validation.Valid;
 import java.sql.Date;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
