@@ -35,7 +35,7 @@ Web and Data are separated to structure the project better.
 * Pull Spring Boot image from Docker Hub
     
     docker run spring-boot-docker
-* Extract from target folder under WEB part of the project talcibank-web-SNAPSHOT-002 and place it in a folder together with Dockerfile
+* Extract from target folder under WEB part of the project talcibank-web-SNAPSHOT-002.jar (or .war) and place it in a folder together with Dockerfile
 * Open the console in that folder
 * Run command 
 
