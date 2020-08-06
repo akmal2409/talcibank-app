@@ -8,7 +8,7 @@ Web and Data are separated to structure the project better.
 * Planning to integrate a database
 * Do front end with Angular (First I have to learn it xD)
 * Add Spring Security
-* Deploy using Docker
+* ~~Deploy using Docker
 * More TBA :D
 
 # Clone repository
