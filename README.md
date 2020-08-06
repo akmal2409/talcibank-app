@@ -35,6 +35,9 @@ Web and Data are separated to structure the project better.
 * Hibernate
 * Project Lombok
 
+# CI/CD
+* Circle CI
+
 ## Prerequisites
 * Java 11 or newer
 * Maven
